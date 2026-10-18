@@ -111,3 +111,5 @@ The integration code is free; API generation and any configured LLM follow their
 [Source](https://github.com/AceDataCloud/SunoCrewAI) · [Issues](https://github.com/AceDataCloud/SunoCrewAI/issues) · dev@acedata.cloud
 
 Development: `uv sync --group dev`, `uv run pytest`, `uv run ruff check .`, `uv build`. Tests mock paid HTTP calls. No paid generation is performed by CI.
+
+Release safety: HTTP errors retain only status and a safe message, never raw service bodies or credential-bearing headers. Explicit nested failed states terminate polling even before finished_at appears; a finished task without a valid audio URL is not success. Original cost output is restricted to Credits amount/list_amount/currency.

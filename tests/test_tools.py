@@ -6,6 +6,7 @@ import pytest
 from crewai.tools.tool_failure import ToolFailure
 
 from suno_crewai import SunoGenerateMusicTool, SunoRetrieveTaskTool
+from suno_crewai._base import ServiceHTTPError
 
 
 def reply(body, status=200):
@@ -84,7 +85,7 @@ def test_terminal_failure_is_structured_and_not_retryable():
     with patch("httpx.Client.post", return_value=reply(body)):
         result = SunoRetrieveTaskTool(api_key="key").run(task_id="existing")
     assert isinstance(result, ToolFailure) and not result.retryable
-    assert result.code == "suno_task_failed"
+    assert result.code == "task_failed"
 
 
 @pytest.mark.parametrize("status", [401, 403, 429, 500])
@@ -92,9 +93,9 @@ def test_http_status_retained_without_retry(status):
     with patch(
         "httpx.Client.post", return_value=reply({"error": "fixture"}, status)
     ) as post:
-        with pytest.raises(httpx.HTTPStatusError) as caught:
+        with pytest.raises(ServiceHTTPError) as caught:
             SunoGenerateMusicTool(api_key="key").run(prompt="piano", model="model")
-    assert caught.value.response.status_code == status
+    assert caught.value.status_code == status
     assert post.call_count == 1
 
 
@@ -102,7 +103,7 @@ def test_timeout_is_not_retried():
     with patch(
         "httpx.Client.post", side_effect=httpx.ReadTimeout("unknown submission outcome")
     ) as post:
-        with pytest.raises(httpx.ReadTimeout):
+        with pytest.raises(TimeoutError):
             SunoGenerateMusicTool(api_key="key").run(prompt="piano", model="model")
     assert post.call_count == 1
 
@@ -113,8 +114,8 @@ def test_bounded_wait_queries_only_same_task():
         patch(
             "httpx.Client.post", side_effect=[reply(pending), reply(completed())]
         ) as post,
-        patch("suno_crewai.tools.time.monotonic", side_effect=[0, 1, 2]),
-        patch("suno_crewai.tools.time.sleep"),
+        patch("suno_crewai._base.time.monotonic", side_effect=[0, 1, 2]),
+        patch("suno_crewai._base.time.sleep"),
     ):
         result = json.loads(
             SunoRetrieveTaskTool(api_key="key").run(task_id="existing", wait_seconds=10)
@@ -144,3 +145,47 @@ def test_missing_submission_id_is_unknown_not_success():
     with patch("httpx.Client.post", return_value=reply({"success": True})):
         with pytest.raises(ValueError, match="No task ID"):
             SunoGenerateMusicTool(api_key="key").run(prompt="piano", model="model")
+
+
+@pytest.mark.parametrize("where", ["top", "nested"])
+def test_failed_state_before_timestamp_is_terminal(where):
+    body = completed()
+    body["finished_at"] = None
+    if where == "top":
+        body["state"] = "failed"
+    else:
+        body["response"]["data"][0]["status"] = "failed"
+    with patch("httpx.Client.post", return_value=reply(body)):
+        result = SunoRetrieveTaskTool(api_key="key").run(task_id="existing")
+    assert isinstance(result, ToolFailure) and not result.retryable
+
+
+def test_no_terminal_audio_is_not_success():
+    body = completed()
+    body["response"]["data"] = []
+    with patch("httpx.Client.post", return_value=reply(body)):
+        result = SunoRetrieveTaskTool(api_key="key").run(task_id="existing")
+    assert isinstance(result, ToolFailure) and result.code == "missing_terminal_media"
+
+
+def test_error_and_cost_payloads_do_not_leak_private_fields():
+    with patch(
+        "httpx.Client.post",
+        return_value=reply({"error": "private service diagnostic secret-fixture"}, 403),
+    ):
+        with pytest.raises(ServiceHTTPError) as error:
+            SunoRetrieveTaskTool(api_key="secret-fixture").run(task_id="existing")
+    assert error.value.status_code == 403
+    assert "private service" not in str(error.value) and "secret-fixture" not in str(
+        error.value
+    )
+    body = completed()
+    body["response"]["cost"]["private_key"] = "private account data"
+    with patch("httpx.Client.post", return_value=reply(body)):
+        result = SunoRetrieveTaskTool(api_key="key").run(task_id="existing")
+    assert "private account data" not in result
+
+
+def test_management_token_is_rejected_before_network():
+    with pytest.raises(ValueError):
+        SunoRetrieveTaskTool(api_key="platform-management-fixture")

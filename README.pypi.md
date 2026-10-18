@@ -111,3 +111,5 @@ The integration code is free; API generation and any configured LLM follow their
 [Source](https://github.com/AceDataCloud/SunoCrewAI) · [Issues](https://github.com/AceDataCloud/SunoCrewAI/issues) · dev@acedata.cloud
 
 Development: `uv sync --group dev`, `uv run pytest`, `uv run ruff check .`, `uv build`. Tests mock paid HTTP calls. No paid generation is performed by CI.
+
+Release safety: HTTP errors retain status without raw bodies/headers; nested explicit failure is terminal before finished_at, and terminal missing audio is not success. Cost output is filtered.

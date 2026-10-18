@@ -101,3 +101,5 @@ uv run python examples/query_existing.py YOUR_EXISTING_TASK_ID
 代码免费，生成和你配置的 LLM 按当前价格计费；查询中的 cost 是原任务费用，不是新增营收或新扣款证据。工具把用户 prompt 与 Token 发往 `api.acedata.cloud`，仅向 agent 返回过滤后的结果，不返回原始请求和身份字段。测试均 Mock 收费 HTTP，不把安装、测试次数当用户或收入。
 
 [源码](https://github.com/AceDataCloud/SunoCrewAI) · [反馈](https://github.com/AceDataCloud/SunoCrewAI/issues) · dev@acedata.cloud
+
+发布安全：HTTP错误仅保留状态与安全说明，不返回原始服务body或凭据headers；嵌套failed等状态在finished_at尚未写入时也停止轮询。终态缺有效音频URL不算成功；原费用只保留Credits的amount/list_amount/currency。
