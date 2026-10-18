@@ -6,11 +6,17 @@ Generate Suno music and retrieve the same asynchronous task from native CrewAI t
 
 ## 1. Install the integration
 
-This is the standalone **Suno** package, not an all-services bundle. A [GitHub review preview with wheel and source archive](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0-preview.1) is available; implementation remains under review. **No PyPI release or official CrewAI catalog listing is claimed.** Install the attached wheel, or pin the exact source commit:
+This is the standalone **Suno** package, not an all-services bundle. A [GitHub review preview with wheel and source archive](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0-preview.1) is available; implementation remains under review. **No PyPI release or official CrewAI catalog listing is claimed.** Use the exact source commit below, or the hash-pinned wheel command after it. Do not install an attachment merely by tag name:
 
 ```bash
 uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@e5eeb04661ed7b9a86e1f2f970a9e7943b027ca2'
 ```
+
+```bash
+uv add 'crewai-suno @ https://github.com/AceDataCloud/SunoCrewAI/releases/download/v0.1.0-preview.1/crewai_suno-0.1.0-py3-none-any.whl#sha256=d31998ca7f33f54c9603a0acb0d906f25933e858be6c83babc5a6d0e5a478e51'
+```
+
+The wheel was built from the exact source SHA above. Its SHA256 is pinned in the URL; if an asset is replaced, installation must fail the digest check. The release page is informational, not the trust anchor.
 
 The source SHA identifies the reviewed preview; inspect the [implementation PR](https://github.com/AceDataCloud/SunoCrewAI/pull/1) before adoption. After a verified PyPI release, the standard entry will be `uv add crewai-suno`. Do not interpret a repository or built wheel as an official listing. CrewAI currently requires Python 3.10–3.13; on Intel macOS its mandatory `lancedb` dependency may lack a wheel. Use a supported Linux environment rather than skipping dependencies for production.
 
