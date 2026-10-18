@@ -1,0 +1,7 @@
+{
+  "as_of": "2026-10-18",
+  "source": "https://github.com/AceDataCloud/SunoDify/blob/main/tools/api_contracts.py",
+  "generation": "POST /suno/audios action=generate custom=false prompt/model/instrumental async=true",
+  "retrieve": "POST /suno/tasks action=retrieve id=<same task>",
+  "scope": "basic text-to-music and one existing task; no fallback, advanced actions, duration guessing or paid retry"
+}
