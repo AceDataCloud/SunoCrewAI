@@ -2,21 +2,23 @@
 
 本集成由 **Ace Data Cloud** 提供，不是 Suno 或 CrewAI 官方产品。独立 Suno 品牌包，不是 17 服务合集。[English](../README.md)
 
-## 安装入口
+## 安装正式版本
 
-已有 [GitHub 预览 wheel 与源码包](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0-preview.1)，源码仍在审阅，**尚未 PyPI 发布或 CrewAI 官方目录收录**。先审阅[本仓库 PR](https://github.com/AceDataCloud/SunoCrewAI/pulls)，固定下列源码，或使用带 SHA256 校验的 wheel；不要仅按 tag 名称安装附件：
-
-```bash
-uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@e5eeb04661ed7b9a86e1f2f970a9e7943b027ca2'
-```
+Ace维护的独立 **Suno** CrewAI原生工具已合并main并发布 **0.1.0**。这不是CrewAI/AMP官方目录收录，PyPI尚未发布；先用公开wheel并校验固定SHA256：
 
 ```bash
-uv add 'crewai-suno @ https://github.com/AceDataCloud/SunoCrewAI/releases/download/v0.1.0-preview.1/crewai_suno-0.1.0-py3-none-any.whl#sha256=d31998ca7f33f54c9603a0acb0d906f25933e858be6c83babc5a6d0e5a478e51'
+uv add 'crewai-suno @ https://github.com/AceDataCloud/SunoCrewAI/releases/download/v0.1.0/crewai_suno-0.1.0-py3-none-any.whl#sha256=c00d2d011c72f0b1d294ce020b06c20668ef8d4572aaffbc53874341bc707ecf'
 ```
 
-wheel 来自同一固定源码 SHA，URL 强制校验 SHA256；若附件替换，摘要不符必须失败。release 页面仅提供信息，不作为信任锚。
+或安装合并后的固定源码：
 
-发布后目标命令为 `uv add crewai-suno`，尚未发布前不要把它当现成安装入口。CrewAI 要求 Python 3.10–3.13；Intel macOS 可能缺 lancedb wheel，正式使用请选择支持的 Linux 环境，不跳过依赖冒充完整安装。
+```bash
+uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb'
+```
+
+[正式发行](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0) · [合并源码](https://github.com/AceDataCloud/SunoCrewAI/commit/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb)。tag/页面只提供信息，源码SHA或wheel摘要才绑定实际字节。旧preview保留不变，不再推荐。共享PyPI新建项目配额恢复、现有发布身份成功上传并registry读回后，才可使用普通 `uv add crewai-suno`，目前不冒称可用。
+
+Python3.10–3.13。Linux完整依赖/测试/干净wheel已通过；Intel macOS可能缺lancedb wheel，正式使用选择支持Linux，不跳依赖冒充完整安装。
 
 ## 获取自己的 API Token
 

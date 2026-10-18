@@ -2,23 +2,25 @@
 
 Generate Suno music and retrieve the same asynchronous task from native CrewAI tools. **Ace Data Cloud provides this integration; it is not an official Suno or CrewAI product.**
 
-[简体中文](https://github.com/AceDataCloud/SunoCrewAI/blob/v0.1.0-preview.1/readme/README_zh_Hans.md) · [Current models and pricing](https://platform.acedata.cloud/models?utm_source=pypi&utm_medium=referral&utm_campaign=evergreen&utm_content=sunocrewai_package_pricing)
+[简体中文](https://github.com/AceDataCloud/SunoCrewAI/blob/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb/readme/README_zh_Hans.md) · [Current models and pricing](https://platform.acedata.cloud/models?utm_source=pypi&utm_medium=referral&utm_campaign=evergreen&utm_content=sunocrewai_package_pricing)
 
-## 1. Install the integration
+## 1. Install the stable release
 
-This is the standalone **Suno** package, not an all-services bundle. A [GitHub review preview with wheel and source archive](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0-preview.1) is available; implementation remains under review. **No PyPI release or official CrewAI catalog listing is claimed.** Use the exact source commit below, or the hash-pinned wheel command after it. Do not install an attachment merely by tag name:
-
-```bash
-uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@e5eeb04661ed7b9a86e1f2f970a9e7943b027ca2'
-```
+The Ace-maintained **Suno** native CrewAI tools are merged on main and released as **0.1.0**. This is a standalone service package. It is **not an official CrewAI/AMP catalog listing**, and no PyPI publication is claimed yet. Install the public wheel with its exact SHA256:
 
 ```bash
-uv add 'crewai-suno @ https://github.com/AceDataCloud/SunoCrewAI/releases/download/v0.1.0-preview.1/crewai_suno-0.1.0-py3-none-any.whl#sha256=d31998ca7f33f54c9603a0acb0d906f25933e858be6c83babc5a6d0e5a478e51'
+uv add 'crewai-suno @ https://github.com/AceDataCloud/SunoCrewAI/releases/download/v0.1.0/crewai_suno-0.1.0-py3-none-any.whl#sha256=c00d2d011c72f0b1d294ce020b06c20668ef8d4572aaffbc53874341bc707ecf'
 ```
 
-The wheel was built from the exact source SHA above. Its SHA256 is pinned in the URL; if an asset is replaced, installation must fail the digest check. The release page is informational, not the trust anchor.
+Or install the exact merged source:
 
-The source SHA identifies the reviewed preview; inspect the [implementation PR](https://github.com/AceDataCloud/SunoCrewAI/pull/1) before adoption. After a verified PyPI release, the standard entry will be `uv add crewai-suno`. Do not interpret a repository or built wheel as an official listing. CrewAI currently requires Python 3.10–3.13; on Intel macOS its mandatory `lancedb` dependency may lack a wheel. Use a supported Linux environment rather than skipping dependencies for production.
+```bash
+uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb'
+```
+
+[Stable release](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0) · [Merged source](https://github.com/AceDataCloud/SunoCrewAI/commit/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb). Tags and pages are informational; the immutable source SHA or wheel SHA256 binds the artifact. Historical previews remain unchanged and are not the recommended version. When an existing authorized PyPI publisher can publish after the shared new-project quota resets, the normal `uv add crewai-suno` command will become available; do not assume publication before registry readback.
+
+CrewAI requires Python3.10–3.13. Complete Linux installation, tests and clean-wheel checks passed. Intel macOS may lack the mandatory lancedb wheel; use a supported Linux environment instead of skipping dependencies for production.
 
 ## 2. Register, sign in and obtain your own Token
 
@@ -26,13 +28,13 @@ The source SHA identifies the reviewed preview; inspect the [implementation PR](
 2. Open **General application**. Check **Suno** access, current price and balance before generating. A service-specific application can only use its allowed service.
 3. Copy the selected API key with the copy icon **1**, or choose **Manage Keys** **2** to create a separate key.
 
-![Copy API Key or open Manage Keys; credentials redacted](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/v0.1.0-preview.1/assets/tutorial/get-api-key-en.png)
+![Copy API Key or open Manage Keys; credentials redacted](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb/assets/tutorial/get-api-key-en.png)
 
 4. Choose **Create**, name the key `CrewAI Suno`, and configure expiration/restrictions as needed. If **Allowed APIs** is enabled, allow both `/suno/audios` and `/suno/tasks`.
 
-![Create optional dedicated API Key; historical screenshot](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/v0.1.0-preview.1/assets/tutorial/create-api-key-en.png)
+![Create optional dedicated API Key; historical screenshot](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb/assets/tutorial/create-api-key-en.png)
 
-These redacted screenshots are reused unchanged from the Ace SunoDify tutorial, revision `8d3d03570e73324220f111f7fe343da0792a8071`, retrieved 2026-10-18. The historical name `Dify tutorial` in the second screenshot is only an example; use `CrewAI Suno`. No visible real credential is included. See [image sources](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/v0.1.0-preview.1/assets/tutorial/source.json).
+These redacted screenshots are reused unchanged from the Ace SunoDify tutorial, revision `8d3d03570e73324220f111f7fe343da0792a8071`, retrieved 2026-10-18. The historical name `Dify tutorial` in the second screenshot is only an example; use `CrewAI Suno`. No visible real credential is included. See [image sources](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb/assets/tutorial/source.json).
 
 Set the raw API-consumer Token in the environment variable `ACEDATACLOUD_API_KEY` using your secret manager or terminal's secure input. Do not prepend `Bearer`, use a platform management Token, put the key in prompts, or commit `.env` files. Tools also accept `api_key=...` when a secure credential store supplies it; it is excluded from serialization.
 
@@ -90,7 +92,7 @@ The ID must belong to your Key. The published payloads are `/suno/audios` with `
 
 ## 5. Inspect execution and output
 
-![Official historical CrewAI execution trace, not Ace runtime evidence](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/v0.1.0-preview.1/assets/tutorial/official-crewai-tracing.png)
+![Official historical CrewAI execution trace, not Ace runtime evidence](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb/assets/tutorial/official-crewai-tracing.png)
 
 Official CrewAI reference, downloaded 2026-10-18 from its tracing documentation. The screenshot's historical date marker is `10/1/2025`; its capture version is unspecified. It shows a task timeline and Response output, **not this Suno tool running**, not an Ace result, and not a new GUI promised by this package. Inputs are not expanded in this image. For your own run, inspect the named Suno tool event and its returned task status. See [official tracing guide](https://docs.crewai.com/en/observability/tracing) for optional account/authentication requirements; tracing is not enabled by this package.
 
@@ -112,4 +114,4 @@ The integration code is free; API generation and any configured LLM follow their
 
 Development: `uv sync --group dev`, `uv run pytest`, `uv run ruff check .`, `uv build`. Tests mock paid HTTP calls. No paid generation is performed by CI.
 
-Release safety: HTTP errors retain status without raw bodies/headers; nested explicit failure is terminal before finished_at, and terminal missing audio is not success. Cost output is filtered.
+Release safety: HTTP errors retain only status and a safe message, never raw service bodies or credential-bearing headers. Explicit nested failed states terminate polling even before finished_at appears; a finished task without a valid audio URL is not success. Original cost output is restricted to Credits amount/list_amount/currency.
