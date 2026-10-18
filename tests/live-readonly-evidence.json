@@ -1,0 +1,16 @@
+{
+  "service": "Suno",
+  "as_of": "2026-10-18",
+  "task_id_matches": true,
+  "status": "succeeded",
+  "success": true,
+  "media_count": 2,
+  "original_cost": {
+    "amount": 0.504,
+    "currency": "credit",
+    "list_amount": 0.56
+  },
+  "new_generation_calls": 0,
+  "paid_model_calls": 0,
+  "limits": "Read-only existing task, no new bill/unique-bill or media playback verification; runtime missing mandatory lancedb, Linux CI pending."
+}

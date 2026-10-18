@@ -1,0 +1,36 @@
+[project]
+name = "crewai-suno"
+version = "0.1.0"
+description = "Suno by Ace Data Cloud: native CrewAI music generation and same-task retrieval tools"
+readme = "README.pypi.md"
+requires-python = ">=3.10,<3.14"
+license = "MIT"
+authors = [{name = "Ace Data Cloud Dev", email = "dev@acedata.cloud"}]
+keywords = ["crewai", "suno", "music", "audio", "agents", "acedatacloud"]
+dependencies = ["crewai>=1.15.28,<2", "httpx>=0.28,<1", "pydantic>=2.11,<3"]
+
+[project.urls]
+Homepage = "https://github.com/AceDataCloud/SunoCrewAI"
+Repository = "https://github.com/AceDataCloud/SunoCrewAI"
+Documentation = "https://github.com/AceDataCloud/SunoCrewAI#readme"
+Issues = "https://github.com/AceDataCloud/SunoCrewAI/issues"
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff==0.15.1", "build>=1,<2", "twine>=6,<7"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/suno_crewai"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]

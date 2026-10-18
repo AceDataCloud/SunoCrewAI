@@ -1,0 +1,8 @@
+{
+  "retrieved_at": "2026-10-18",
+  "images": [
+    {"file":"get-api-key-en.png","source_url":"https://raw.githubusercontent.com/AceDataCloud/SunoDify/8d3d03570e73324220f111f7fe343da0792a8071/_assets/tutorial/get-api-key-en.png","what_it_shows":"Redacted General application API Key copy and Manage Keys controls","limits":"Historical screenshot; no credentials visible; reused unchanged"},
+    {"file":"create-api-key-en.png","source_url":"https://raw.githubusercontent.com/AceDataCloud/SunoDify/8d3d03570e73324220f111f7fe343da0792a8071/_assets/tutorial/create-api-key-en.png","what_it_shows":"Create credential dialog","limits":"Historical example says Dify tutorial; README explains to use CrewAI Suno; reused unchanged"},
+    {"file":"official-crewai-tracing.png","source_url":"https://raw.githubusercontent.com/crewAIInc/crewAI/40bb2d3b586e8367d206090cc62df5242206008f/docs/images/crewai-tracing.png","official_page_url":"https://docs.crewai.com/v1.15.28/en/observability/tracing","what_it_shows":"Official CrewAI execution timeline and Response output","limits":"Historical date marker 10/1/2025; unknown capture version; not Ace runtime, not Suno package validation, not promised GUI"}
+  ]
+}
