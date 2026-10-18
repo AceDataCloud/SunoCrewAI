@@ -2,17 +2,17 @@
 
 Generate Suno music and retrieve the same asynchronous task from native CrewAI tools. **Ace Data Cloud provides this integration; it is not an official Suno or CrewAI product.**
 
-[简体中文](https://github.com/AceDataCloud/SunoCrewAI/blob/main/readme/README_zh_Hans.md) · [Current models and pricing](https://platform.acedata.cloud/models?utm_source=pypi&utm_medium=referral&utm_campaign=evergreen&utm_content=sunocrewai_package_pricing)
+[简体中文](https://github.com/AceDataCloud/SunoCrewAI/blob/v0.1.0-preview.1/readme/README_zh_Hans.md) · [Current models and pricing](https://platform.acedata.cloud/models?utm_source=pypi&utm_medium=referral&utm_campaign=evergreen&utm_content=sunocrewai_package_pricing)
 
 ## 1. Install the integration
 
-This is the standalone **Suno** package, not an all-services bundle. Source and wheels are under review; **no PyPI release or official CrewAI catalog listing is claimed yet**. Until release, install the exact reviewed commit from this repository:
+This is the standalone **Suno** package, not an all-services bundle. A [GitHub review preview with wheel and source archive](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0-preview.1) is available; implementation remains under review. **No PyPI release or official CrewAI catalog listing is claimed.** Install the attached wheel, or pin the exact source commit:
 
 ```bash
-uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@REVIEWED_COMMIT'
+uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@e5eeb04661ed7b9a86e1f2f970a9e7943b027ca2'
 ```
 
-Replace `REVIEWED_COMMIT` with a full commit SHA from the PR you inspected. After a verified PyPI release, the standard entry will be `uv add crewai-suno`. Do not interpret a repository or built wheel as an official listing. CrewAI currently requires Python 3.10–3.13; on Intel macOS its mandatory `lancedb` dependency may lack a wheel. Use a supported Linux environment rather than skipping dependencies for production.
+The source SHA identifies the reviewed preview; inspect the [implementation PR](https://github.com/AceDataCloud/SunoCrewAI/pull/1) before adoption. After a verified PyPI release, the standard entry will be `uv add crewai-suno`. Do not interpret a repository or built wheel as an official listing. CrewAI currently requires Python 3.10–3.13; on Intel macOS its mandatory `lancedb` dependency may lack a wheel. Use a supported Linux environment rather than skipping dependencies for production.
 
 ## 2. Register, sign in and obtain your own Token
 
@@ -20,13 +20,13 @@ Replace `REVIEWED_COMMIT` with a full commit SHA from the PR you inspected. Afte
 2. Open **General application**. Check **Suno** access, current price and balance before generating. A service-specific application can only use its allowed service.
 3. Copy the selected API key with the copy icon **1**, or choose **Manage Keys** **2** to create a separate key.
 
-![Copy API Key or open Manage Keys; credentials redacted](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/main/assets/tutorial/get-api-key-en.png)
+![Copy API Key or open Manage Keys; credentials redacted](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/v0.1.0-preview.1/assets/tutorial/get-api-key-en.png)
 
 4. Choose **Create**, name the key `CrewAI Suno`, and configure expiration/restrictions as needed. If **Allowed APIs** is enabled, allow both `/suno/audios` and `/suno/tasks`.
 
-![Create optional dedicated API Key; historical screenshot](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/main/assets/tutorial/create-api-key-en.png)
+![Create optional dedicated API Key; historical screenshot](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/v0.1.0-preview.1/assets/tutorial/create-api-key-en.png)
 
-These redacted screenshots are reused unchanged from the Ace SunoDify tutorial, revision `8d3d03570e73324220f111f7fe343da0792a8071`, retrieved 2026-10-18. The historical name `Dify tutorial` in the second screenshot is only an example; use `CrewAI Suno`. No visible real credential is included. See [image sources](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/main/assets/tutorial/source.json).
+These redacted screenshots are reused unchanged from the Ace SunoDify tutorial, revision `8d3d03570e73324220f111f7fe343da0792a8071`, retrieved 2026-10-18. The historical name `Dify tutorial` in the second screenshot is only an example; use `CrewAI Suno`. No visible real credential is included. See [image sources](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/v0.1.0-preview.1/assets/tutorial/source.json).
 
 Set the raw API-consumer Token in the environment variable `ACEDATACLOUD_API_KEY` using your secret manager or terminal's secure input. Do not prepend `Bearer`, use a platform management Token, put the key in prompts, or commit `.env` files. Tools also accept `api_key=...` when a secure credential store supplies it; it is excluded from serialization.
 
@@ -84,7 +84,7 @@ The ID must belong to your Key. The published payloads are `/suno/audios` with `
 
 ## 5. Inspect execution and output
 
-![Official historical CrewAI execution trace, not Ace runtime evidence](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/main/assets/tutorial/official-crewai-tracing.png)
+![Official historical CrewAI execution trace, not Ace runtime evidence](https://raw.githubusercontent.com/AceDataCloud/SunoCrewAI/v0.1.0-preview.1/assets/tutorial/official-crewai-tracing.png)
 
 Official CrewAI reference, downloaded 2026-10-18 from its tracing documentation. The screenshot's historical date marker is `10/1/2025`; its capture version is unspecified. It shows a task timeline and Response output, **not this Suno tool running**, not an Ace result, and not a new GUI promised by this package. Inputs are not expanded in this image. For your own run, inspect the named Suno tool event and its returned task status. See [official tracing guide](https://docs.crewai.com/en/observability/tracing) for optional account/authentication requirements; tracing is not enabled by this package.
 

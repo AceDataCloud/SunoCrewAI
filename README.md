@@ -6,13 +6,13 @@ Generate Suno music and retrieve the same asynchronous task from native CrewAI t
 
 ## 1. Install the integration
 
-This is the standalone **Suno** package, not an all-services bundle. Source and wheels are under review; **no PyPI release or official CrewAI catalog listing is claimed yet**. Until release, install the exact reviewed commit from this repository:
+This is the standalone **Suno** package, not an all-services bundle. A [GitHub review preview with wheel and source archive](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0-preview.1) is available; implementation remains under review. **No PyPI release or official CrewAI catalog listing is claimed.** Install the attached wheel, or pin the exact source commit:
 
 ```bash
-uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@REVIEWED_COMMIT'
+uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@e5eeb04661ed7b9a86e1f2f970a9e7943b027ca2'
 ```
 
-Replace `REVIEWED_COMMIT` with a full commit SHA from the PR you inspected. After a verified PyPI release, the standard entry will be `uv add crewai-suno`. Do not interpret a repository or built wheel as an official listing. CrewAI currently requires Python 3.10–3.13; on Intel macOS its mandatory `lancedb` dependency may lack a wheel. Use a supported Linux environment rather than skipping dependencies for production.
+The source SHA identifies the reviewed preview; inspect the [implementation PR](https://github.com/AceDataCloud/SunoCrewAI/pull/1) before adoption. After a verified PyPI release, the standard entry will be `uv add crewai-suno`. Do not interpret a repository or built wheel as an official listing. CrewAI currently requires Python 3.10–3.13; on Intel macOS its mandatory `lancedb` dependency may lack a wheel. Use a supported Linux environment rather than skipping dependencies for production.
 
 ## 2. Register, sign in and obtain your own Token
 

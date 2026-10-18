@@ -17,3 +17,8 @@ jobs:
       - run: uv run pytest
       - run: uv run ruff check .
       - run: uv build
+      - name: Install built wheel in a clean environment
+        run: |
+          uv venv /tmp/suno-wheel --python ${{ matrix.python }}
+          uv pip install --python /tmp/suno-wheel/bin/python dist/crewai_suno-0.1.0-py3-none-any.whl
+          /tmp/suno-wheel/bin/python -c 'from suno_crewai import SunoGenerateMusicTool, SunoRetrieveTaskTool; t = SunoRetrieveTaskTool(api_key="fixture"); assert "fixture" not in str(t.model_dump()); assert "task_id" in t.args_schema.model_fields; print("clean wheel import and schema passed")'

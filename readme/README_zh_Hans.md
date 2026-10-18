@@ -4,10 +4,10 @@
 
 ## 安装入口
 
-源码和构建包正在审阅，**尚未声称 PyPI 发布或 CrewAI 官方目录收录**。先审阅[本仓库 PR](https://github.com/AceDataCloud/SunoCrewAI/pulls)，使用已审阅的完整 commit SHA 安装：
+已有 [GitHub 预览 wheel 与源码包](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0-preview.1)，源码仍在审阅，**尚未 PyPI 发布或 CrewAI 官方目录收录**。先审阅[本仓库 PR](https://github.com/AceDataCloud/SunoCrewAI/pulls)，安装 wheel 或固定源码：
 
 ```bash
-uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@REVIEWED_COMMIT'
+uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@e5eeb04661ed7b9a86e1f2f970a9e7943b027ca2'
 ```
 
 发布后目标命令为 `uv add crewai-suno`，尚未发布前不要把它当现成安装入口。CrewAI 要求 Python 3.10–3.13；Intel macOS 可能缺 lancedb wheel，正式使用请选择支持的 Linux 环境，不跳过依赖冒充完整安装。
