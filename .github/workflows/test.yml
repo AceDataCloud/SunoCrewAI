@@ -22,3 +22,8 @@ jobs:
           uv venv /tmp/suno-wheel --python ${{ matrix.python }}
           uv pip install --python /tmp/suno-wheel/bin/python dist/crewai_suno-0.1.0-py3-none-any.whl
           /tmp/suno-wheel/bin/python -c 'from suno_crewai import SunoGenerateMusicTool, SunoRetrieveTaskTool; t = SunoRetrieveTaskTool(api_key="fixture"); assert "fixture" not in str(t.model_dump()); assert "task_id" in t.args_schema.model_fields; print("clean wheel import and schema passed")'
+      - name: Install and inspect public stable wheel
+        run: |
+          uv venv /tmp/public-service-wheel --python ${{ matrix.python }}
+          uv pip install --python /tmp/public-service-wheel/bin/python 'crewai-suno @ https://github.com/AceDataCloud/SunoCrewAI/releases/download/v0.1.0/crewai_suno-0.1.0-py3-none-any.whl#sha256=c00d2d011c72f0b1d294ce020b06c20668ef8d4572aaffbc53874341bc707ecf'
+          /tmp/public-service-wheel/bin/python -c 'from suno_crewai import SunoRetrieveTaskTool; from importlib.metadata import version; t=SunoRetrieveTaskTool(api_key="fixture"); assert version("crewai-suno")=="0.1.0"; assert "fixture" not in str(t.model_dump()); assert "task_id" in t.args_schema.model_fields; print("public stable wheel full-install verified")'
