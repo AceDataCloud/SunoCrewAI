@@ -27,3 +27,16 @@ jobs:
           uv venv /tmp/public-service-wheel --python ${{ matrix.python }}
           uv pip install --python /tmp/public-service-wheel/bin/python 'crewai-suno @ https://github.com/AceDataCloud/SunoCrewAI/releases/download/v0.1.0/crewai_suno-0.1.0-py3-none-any.whl#sha256=c00d2d011c72f0b1d294ce020b06c20668ef8d4572aaffbc53874341bc707ecf'
           /tmp/public-service-wheel/bin/python -c 'from suno_crewai import SunoRetrieveTaskTool; from importlib.metadata import version; t=SunoRetrieveTaskTool(api_key="fixture"); assert version("crewai-suno")=="0.1.0"; assert "fixture" not in str(t.model_dump()); assert "task_id" in t.args_schema.model_fields; print("public stable wheel full-install verified")'
+      - name: Install ordinary PyPI package in a fresh consumer environment
+        run: |
+          uv venv --seed --python ${{ matrix.python }} /tmp/pypi-suno-consumer
+          /tmp/pypi-suno-consumer/bin/python -m pip install --upgrade pip
+          /tmp/pypi-suno-consumer/bin/python -m pip install --report pypi-install-report.json crewai-suno==0.1.0
+          /tmp/pypi-suno-consumer/bin/python -m pip check
+          /tmp/pypi-suno-consumer/bin/python scripts/check_public_install.py pypi-install-report.json ${{ matrix.python }} > pypi-consumer.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pypi-consumer-${{ matrix.python }}
+          path: |
+            pypi-install-report.json
+            pypi-consumer.json

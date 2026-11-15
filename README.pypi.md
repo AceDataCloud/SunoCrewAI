@@ -6,7 +6,15 @@ Generate Suno music and retrieve the same asynchronous task from native CrewAI t
 
 ## 1. Install the stable release
 
-The Ace-maintained **Suno** native CrewAI tools are merged on main and released as **0.1.0**. This is a standalone service package. It is **not an official CrewAI/AMP catalog listing**, and no PyPI publication is claimed yet. Install the public wheel with its exact SHA256:
+The Ace-maintained **Suno** native CrewAI tools are merged on main and released as **0.1.0**. This standalone service package is now available on [PyPI](https://pypi.org/project/crewai-suno/0.1.0/). It is **not an official CrewAI/AMP catalog listing**. Install it by its own package name:
+
+```bash
+python -m pip install crewai-suno==0.1.0
+# In a uv project:
+uv add crewai-suno==0.1.0
+```
+
+For a SHA256-bound direct install, the original public wheel remains available:
 
 ```bash
 uv add 'crewai-suno @ https://github.com/AceDataCloud/SunoCrewAI/releases/download/v0.1.0/crewai_suno-0.1.0-py3-none-any.whl#sha256=c00d2d011c72f0b1d294ce020b06c20668ef8d4572aaffbc53874341bc707ecf'
@@ -18,7 +26,7 @@ Or install the exact merged source:
 uv add 'crewai-suno @ git+https://github.com/AceDataCloud/SunoCrewAI.git@5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb'
 ```
 
-[Stable release](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0) · [Merged source](https://github.com/AceDataCloud/SunoCrewAI/commit/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb). Tags and pages are informational; the immutable source SHA or wheel SHA256 binds the artifact. Historical previews remain unchanged and are not the recommended version. When an existing authorized PyPI publisher can publish after the shared new-project quota resets, the normal `uv add crewai-suno` command will become available; do not assume publication before registry readback.
+[Stable release](https://github.com/AceDataCloud/SunoCrewAI/releases/tag/v0.1.0) · [Merged source](https://github.com/AceDataCloud/SunoCrewAI/commit/5b3bc4d597f5fb046b1d6298d5e833ad7f2b29fb). Tags and pages are informational; the immutable source SHA or wheel SHA256 binds the artifact. Historical previews remain unchanged and are not the recommended version. The PyPI 0.1.0 wheel was read back on 2026-11-15 with the same SHA256 as this GitHub asset. Registry publication and official CrewAI inclusion are separate. The published 0.1.0 package description was frozen before its first PyPI upload and may still describe PyPI as pending; this current README records the verified distribution state.
 
 CrewAI requires Python3.10–3.13. Complete Linux installation, tests and clean-wheel checks passed. Intel macOS may lack the mandatory lancedb wheel; use a supported Linux environment instead of skipping dependencies for production.
 
