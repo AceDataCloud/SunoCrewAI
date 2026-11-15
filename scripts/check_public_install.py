@@ -22,6 +22,8 @@ BRANDS = {
 
 
 def main():
+    expected_python = tuple(int(part) for part in sys.argv[2].split("."))
+    assert sys.version_info[:2] == expected_python, "consumer interpreter mismatch"
     report = json.loads(Path(sys.argv[1]).read_text())
     installed = {d.metadata["Name"].lower().replace("_", "-") for d in distributions()}
     assert installed & BRANDS == {PACKAGE}, "brand isolation failed"
